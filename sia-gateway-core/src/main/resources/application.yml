@@ -31,9 +31,9 @@ zuul:
     useSeparateThreadPools: true
     threadPoolKeyPrefix: zuulgw
 #  routes:
-#    gatewaydemo1/test1: /myProduct/**
+#    gatewaydemo1/test1: /gatewaydemo1/**
 #    serviceId: gatewaydemo1
-#    gatewaydemo1: /myProduct/**
+#    gatewaydemo1: /gatewaydemo1/**
 
 ###ribbon.filter.metadata.enabled: false
 
