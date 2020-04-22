@@ -61,9 +61,16 @@ public class BaseAdminRepository {
 		return zuulGroupName;
 	}
 
+	 /**
+	  * 功能描述：根据组名称查询gateway_info
+	  */
 	public String getSqlStrByGroupName(String sql) {
 
 		String zuulGroupName = authCheckor.getZuulGroupName();
+		//防止空指针异常
+//		if(null == zuulGroupName){
+//			zuulGroupName = "DEV-GATEWAY-CORE";
+//		}
 
 		String querySQL = sql;
 		if (!zuulGroupName.equals(GatewayConstant.API_GATEWAY_CORE)) {
@@ -96,6 +103,11 @@ public class BaseAdminRepository {
 		LOGGER.info("zuulGroupName:[{}]", zuulGroupName);
 
 		String querySQL = null;
+
+		//加一个判断如果组名称为空，那么将组名称设置为默认的DEV-GATEWAY-CORE
+//		if(StringUtils.isEmpty(zuulGroupName)){
+//			zuulGroupName = "DEV-GATEWAY-CORE";
+//		}
 
 		if (zuulGroupName.equals(GatewayConstant.API_GATEWAY_CORE)) {
 

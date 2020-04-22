@@ -114,9 +114,10 @@ public class DiscoveryService {
                 return getServiceListV2(info.getEurekaUrls(), serviceId);
             }
         }
-
-        return discoveryClient.getInstances(serviceId).stream().
+        List<ServiceInstance> instances = discoveryClient.getInstances(serviceId);
+        List<String> list = instances.stream().
                 map(service -> service.getHost() + ":" + service.getPort()).collect(Collectors.toList());
+        return list;
     }
 
     public Map<String, Map<String, String>> getServiceStatus() {
