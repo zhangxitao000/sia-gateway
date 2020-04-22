@@ -188,7 +188,7 @@ export default {
   },
   mounted () {
     this.getGantewayTopo()
-    // this.get_nodes(this.topoObj)
+    this.get_nodes(this.topoObj)
   },
   methods: {
     // 获取列表信息
@@ -207,6 +207,8 @@ export default {
       self.$http.post(self.$api.getApiAddress('/getGatewayTopo', 'CESHI_API_HOST'), {
         groupName: this.$store.state.frame.currentGatewayGroup
       }).then((res) => {
+        debugger;
+        console.log(res);
         if (res.data.code === 200) {
           let data = res.data.response !== null ? res.data.response : []
           if (res.data.response !== null) {

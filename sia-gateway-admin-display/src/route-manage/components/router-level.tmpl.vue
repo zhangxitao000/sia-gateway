@@ -71,55 +71,55 @@ export default {
         // "clientNodes": [
         //     "应用:127.0.0.1:8080",
         //     "应用:127.0.0.1:8081"
-        // ], 
-        // "zuulNodes": [ 
+        // ],
+        // "zuulNodes": [
         //     "10.10.168.19:8080",
         //     "10.10.168.19:8081"
-        // ], 
-        // "upstreamNodes": [ 
-        //     "10.143.135.136:8082" 
-        // ], 
+        // ],
+        // "upstreamNodes": [
+        //     "10.143.135.136:8082"
+        // ],
         // "link": [
-        //       { 
-        //           "dest": "10.10.168.19:8080", 
-        //           "source": "应用:127.0.0.1:8080", 
-        //           "state": "GREEN", 
-        //           "lastRequestTime": 1561712559390 
+        //       {
+        //           "dest": "10.10.168.19:8080",
+        //           "source": "应用:127.0.0.1:8080",
+        //           "state": "GREEN",
+        //           "lastRequestTime": 1561712559390
         //       },
-        //       { 
-        //           "dest": "10.10.168.19:8081", 
-        //           "source": "应用:127.0.0.1:8081", 
-        //           "state": "GREEN", 
-        //           "lastRequestTime": 1561712559390 
+        //       {
+        //           "dest": "10.10.168.19:8081",
+        //           "source": "应用:127.0.0.1:8081",
+        //           "state": "GREEN",
+        //           "lastRequestTime": 1561712559390
         //       },
-        //       { 
-        //           "dest": "10.10.168.19:8081", 
-        //           "source": "应用:127.0.0.1:8080", 
-        //           "state": "GRAY", 
-        //           "lastRequestTime": 1561712559390 
-        //       }, 
-        //       { 
-        //           "dest": "10.143.135.136:8082", 
-        //           "source": "10.10.168.19:8080", 
-        //           "state": "GRAY", 
-        //           "lastRequestTime": 0 
-        //       } 
-        //   ], 
-        //   "routeId": "mutiRegister", 
-        //   "groupName": "DEV-GATEWAY-CORE", 
-        //   "maxDelay": 645, 
-        //   "minDelay": 18, 
-        //   "lastRequestTime": 1561712590521, 
-        //   "exceptionCause": {}, 
+        //       {
+        //           "dest": "10.10.168.19:8081",
+        //           "source": "应用:127.0.0.1:8080",
+        //           "state": "GRAY",
+        //           "lastRequestTime": 1561712559390
+        //       },
+        //       {
+        //           "dest": "10.143.135.136:8082",
+        //           "source": "10.10.168.19:8080",
+        //           "state": "GRAY",
+        //           "lastRequestTime": 0
+        //       }
+        //   ],
+        //   "routeId": "mutiRegister",
+        //   "groupName": "DEV-GATEWAY-CORE",
+        //   "maxDelay": 645,
+        //   "minDelay": 18,
+        //   "lastRequestTime": 1561712590521,
+        //   "exceptionCause": {},
         //   "recentDelays": [
-        //       "/op/test/pppppp:645", 
-        //       "/op/test/pppppp:36", 
-        //       "/op/test/pppppp:42", 
-        //       "/op/test/pppppp:18", 
-        //       "/op/test/pppppp:645", 
-        //       "/op/test/pppppp:36", 
-        //       "/op/test/pppppp:42", 
-        //       "/op/test/pppppp:18" 
+        //       "/op/test/pppppp:645",
+        //       "/op/test/pppppp:36",
+        //       "/op/test/pppppp:42",
+        //       "/op/test/pppppp:18",
+        //       "/op/test/pppppp:645",
+        //       "/op/test/pppppp:36",
+        //       "/op/test/pppppp:42",
+        //       "/op/test/pppppp:18"
         //   ]
       },
       //jsPlumbJson数据
@@ -140,7 +140,7 @@ export default {
   },
   mounted () {
     this.getTaskList()
-    // this.get_nodes(this.routerLevelList)
+    this.get_nodes(this.routerLevelList)
   },
   methods: {
     get_nodes (data) {
@@ -347,11 +347,12 @@ export default {
       let self = this
       self.$http.post(self.$api.getApiAddress('/getRouteTopo', 'CESHI_API_HOST'), {
         groupName: this.routerLevelParams.zuulGroupName,
-        routeid: this.routerLevelParams.routeid
+        routeid: this.routerLevelParams.routeid,
+        apiName: this.routerLevelParams.apiName
       }).then((res) => {
         let data = res.data.response !== null ? res.data.response : []
         if (res.data.response !== null) {
-          this.get_nodes(data)
+          this.get_nodes(res.data.response);
           this.routerLevelList = res.data.response !== null ? res.data.response : {}
           this.showTopoDetails = true
         } else {
